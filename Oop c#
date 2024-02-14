@@ -1,0 +1,191 @@
+using System.Linq;
+using System.IO;
+using CSharpShellCore;
+namespace The_final_project_of_oop;
+
+interface cars
+{
+	string model { set; get; }
+	string color { set; get; }
+	int id { set; get; }
+
+	double price { set; get; }
+	void adddata(cars obj);
+	public string[] showresult();
+}
+class jeep : cars
+{
+
+
+	public string model { set; get; }
+	public string color { set; get; }
+	public int id { set; get; }
+
+	public double price { set; get; }
+	public void adddata(cars obj)
+	{
+
+		File.AppendAllText(model + "*" + id + "*" + price, "x. docx");
+
+	}
+	public string[] showresult()
+	{
+		string d = File.ReadAllText(" jeep.txt");
+		return d.Split("*");
+
+	}
+
+}
+
+class Bmw : cars
+{
+
+
+	public string model { set; get; }
+	public string color { set; get; }
+	public int id { set; get; }
+
+	public double price { set; get; }
+	public void adddata(cars obj)
+	{
+
+		File.AppendAllText(model + "*" + id + "*" + price, "x docx");
+
+	}
+	public string[] showresult()
+	{
+		string d = File.ReadAllText(" bmw.txt");
+		return d.Split("*");
+
+
+	}
+}
+
+
+public static class Program
+
+{
+	public static void Main()
+
+	{
+
+		string o;
+		do
+		{
+			Console.BackgroundColor = ConsoleColor.DarkBlue;
+			Console.ForegroundColor = ConsoleColor.White;
+			Console.WriteLine("■■■menu of cars ■■■ " + "\n 1-add to jeep\n 2-addtoBMW\n3-show the cars of  jeep\n 4-show the cars of Bmw\n 5-search by Id");
+			Console.WriteLine("Enter number of your choice");
+			int num = int.Parse(Console.ReadLine());
+			Console.Clear();
+
+			Console.BackgroundColor = ConsoleColor.Red;
+			Console.ForegroundColor = ConsoleColor.Yellow;
+
+			string Model = "ff"; string Color = "rrf";
+			int id = 333; int price = 4555;
+			if (num == 1 || num == 2)
+			{
+				Console.WriteLine("please enter the model of car");
+				Model = Console.ReadLine();
+
+				Console.WriteLine("please enter  The color of car");
+
+				Color = Console.ReadLine();
+
+				Console.WriteLine("please enter the id of ");
+				id = int.Parse(Console.ReadLine());
+
+				Console.WriteLine("please enter the price of ");
+				price = int.Parse(Console.ReadLine());
+				Console.Clear();
+			}
+
+			Console.BackgroundColor = ConsoleColor.Green;
+			Console.ForegroundColor = ConsoleColor.White;
+			switch (num)
+			{
+				case 1:
+					jeep j = new jeep();
+					j.model = Model;
+					j.id = id;
+					j.color = Color;
+					j.price = price;
+					j.adddata(j);
+					Console.WriteLine("Done");
+					break;
+				case 2:
+					Bmw b = new Bmw();
+					b.model = Model;
+					b.id = id;
+					b.color = Color;
+					b.price = price;
+					b.adddata(b);
+					Console.WriteLine("Done");
+					break;
+				case 3:
+					jeep jp = new jeep();
+					string[] a = jp.showresult();
+					for (int i = 0; i < a.Length; i++)
+					{
+						string[] ss = a[i].Split(' ');
+						for (int jj = 0; jj < ss.Length; jj++)
+						{
+
+							Console.WriteLine(ss[jj] + " ");
+
+						}
+					}
+					break;
+				case 4:
+					Bmw p = new Bmw();
+					string[] arr = p.showresult();
+					for (int i = 0; i < arr.Length; i++)
+					{
+						string[] ss = arr[i].Split(' ');
+						for (int j1 = 0; j1 < ss.Length; j1++)
+						{
+
+							Console.WriteLine(ss[j1] + " ");
+
+						}
+					}
+					break;
+				case 5:
+					Console.WriteLine("please enter Id");
+					int Id = int.Parse(Console.ReadLine());
+					jeep j2 = new jeep();
+					Bmw b4 = new Bmw();
+					string[] arr1 = j2.showresult();
+					string[] arr2 = b4.showresult();
+					for (int i = 0; i < arr1.Length; i++)
+					{
+						if (arr1[i].Contains(Id.ToString()))
+							Console.WriteLine(arr1[i]);
+					}
+
+					for (int J = 0; J < arr2.Length; J++)
+					{
+						if (arr2[J].Contains(Id.ToString()))
+							Console.WriteLine(arr1[J]);
+					}
+
+
+					break;
+				default:
+					Console.WriteLine("error");
+					break;
+			}
+
+
+			Console.WriteLine("do you want to show menu again/n yes or no");
+			o = Console.ReadLine();
+		}
+		while (o == "yes");
+
+
+	}
+
+
+
+}
